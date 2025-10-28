@@ -6,16 +6,15 @@ public class Order {
 
     private String table;
     private List<Product> products;
-    private Boolean isReady;
+    private boolean isReady;
     private long time;
     private List<String> stationsInvolved;
 
-    public Order(String table, List<Product> products, Boolean isReady, long time, List<String> stationsInvolved) {
+    public Order(String table, List<Product> products) {
         this.table = table;
         this.products = products;
-        this.isReady = isReady;
-        this.time = time;
-        this.stationsInvolved = stationsInvolved;
+        this.isReady = false;
+        this.time = System.currentTimeMillis();
     }
 
     public String getTable() {

@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class Controller {
 
-    private final int PORT  = 49045;
+    private final int PORT  = 49045;// Toca pedirlo por View
     private Socket socket;
     private ServerSocket serverSocket;
 

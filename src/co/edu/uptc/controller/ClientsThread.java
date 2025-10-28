@@ -24,7 +24,6 @@ public class ClientsThread extends Thread{
 
             while (running) {
                 String command = dataInput.readUTF();
-
             }
 
             socket.close();
