@@ -1,5 +1,6 @@
 package co.edu.uptc.model;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class Station {
@@ -9,10 +10,9 @@ public class Station {
     private List<Order> orders;
 
 
-    public Station(String name, List<ProductCategory> assignedCategories, List<Order> orders) {
+    public Station(String name, List<ProductCategory> assignedCategories) {
         this.name = name;
         this.assignedCategories = assignedCategories;
-        this.orders = orders;
     }
 
     public boolean manageCategories() {
@@ -21,12 +21,22 @@ public class Station {
     }
 
     public void addOrder(Order order) {
-        // Implementation for adding an order
+        orders.add(order);
     }
 
     public void finishOrder(Order order) {
-        // Implementation for finishing an order
+        Iterator<Order> iterator = orders.iterator();
+        boolean condition = true;
+        Order currentOrder;
+        while (iterator.hasNext() && condition){
+            currentOrder = iterator.next();
+            if (currentOrder.getIdOrden().equalsIgnoreCase(order.getIdOrden())){
+                iterator.remove();
+                condition = false;
+            }
+        }
     }
+
     public String getName() {
         return name;
     }

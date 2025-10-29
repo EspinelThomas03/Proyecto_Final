@@ -19,19 +19,45 @@ public class RestaurantManager {
     }
 
     private void configureStations() {
-        // Implementation for configuring stations
+
     }
 
     public void addOrder(Order order) {
-        // Implementation for adding an order to the queue
+        orderQueue.add(order);
+        shareOrder(order);
     }
 
     private void shareOrder(Order order) {
-        // Implementation for sharing an order with relevant stations
+        for (Station station : stations) {
+            for (ProductCategory category : station.getAssignedCategories()) {
+                if (order.containsCategory(category)) {
+                    station.addOrder(order);
+                    break;
+                }
+
+            }
+        }
     }
 
     public void finishOrder(Order order) {
-        // Implementation for finishing an order and updating records
+        for (Order o : orderQueue) {
+            if (o.getIdOrden().equalsIgnoreCase(order.getIdOrden())) {
+                orderQueue.remove(o);
+                notifyStations(order, order.getStationsInvolved());
+                recordStack.push(o);
+                break;
+            }
+        }
+    }
+
+    private void notifyStations(Order order, List<ProductCategory> categories) {
+        for (Station station : stations) {
+            for (ProductCategory category : categories) {
+                if (station.getAssignedCategories().contains(category)) {
+                    station.finishOrder(order);
+                }
+            }
+        }
     }
 
 }
