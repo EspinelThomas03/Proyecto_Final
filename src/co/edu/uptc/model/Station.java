@@ -1,5 +1,6 @@
 package co.edu.uptc.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -13,11 +14,7 @@ public class Station {
     public Station(String name, List<ProductCategory> assignedCategories) {
         this.name = name;
         this.assignedCategories = assignedCategories;
-    }
-
-    public boolean manageCategories() {
-        // Implementation for managing categories
-        return true;
+        orders = new ArrayList<>();
     }
 
     public void addOrder(Order order) {

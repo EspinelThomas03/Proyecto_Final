@@ -2,6 +2,7 @@ package co.edu.uptc.model;
 
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 
@@ -20,6 +21,23 @@ public class RestaurantManager {
 
     private void configureStations() {
 
+        Station mainKitchen = new Station(
+                "Cocina Principal",
+                List.of(ProductCategory.HAMBURGER, ProductCategory.SANDWICH, ProductCategory.HOT_DOG,
+                        ProductCategory.NACHOS, ProductCategory.QUESADILLA, ProductCategory.SALAD));
+
+        Station pizzas = new Station(
+                "Zona de Pizzas",
+                List.of(ProductCategory.PIZZA));
+
+        Station expeditor = new Station("Zona de Meseros",
+                List.of(ProductCategory.HAMBURGER, ProductCategory.SANDWICH, ProductCategory.HOT_DOG,
+                        ProductCategory.NACHOS, ProductCategory.QUESADILLA, ProductCategory.SALAD,
+                        ProductCategory.PIZZA));
+
+        stations.add(mainKitchen);
+        stations.add(pizzas);
+        stations.add(expeditor);
     }
 
     public void addOrder(Order order) {
@@ -40,12 +58,15 @@ public class RestaurantManager {
     }
 
     public void finishOrder(Order order) {
-        for (Order o : orderQueue) {
+        Iterator<Order> iterator = orderQueue.iterator();
+        boolean condition = false;
+        while (iterator.hasNext() && condition) {
+            Order o = iterator.next();
             if (o.getIdOrden().equalsIgnoreCase(order.getIdOrden())) {
-                orderQueue.remove(o);
-                notifyStations(order, order.getStationsInvolved());
+                iterator.remove();
+                notifyStations(order, order.getCategoriesInvolved());
                 recordStack.push(o);
-                break;
+                condition = true;
             }
         }
     }

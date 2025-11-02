@@ -79,4 +79,12 @@ public class Order {
     public void setTime(long time) {
         this.time = time;
     }
+
+    public List<ProductCategory> getCategoriesInvolved() {
+        return categoriesInvolved;
+    }
+
+    public void setCategoriesInvolved(List<ProductCategory> categoriesInvolved) {
+        this.categoriesInvolved = categoriesInvolved;
+    }
 }

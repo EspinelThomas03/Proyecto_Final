@@ -13,8 +13,7 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
-
-    // Getters and setters
+    
     public String getName() {
         return name;
     }
